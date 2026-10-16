@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>거제야호 - 마노와 함께하는 1박2일 거제여행</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+        .gradient-hero {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.85) 100%);
+        }
+        .tab-active {
+            color: #2563eb;
+            border-bottom: 2px solid #2563eb;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 flex justify-center min-h-screen">
+
+    <!-- Mobile App Container -->
+    <div class="w-full max-w-md bg-slate-50 min-h-screen shadow-2xl relative flex flex-col pb-20 overflow-x-hidden">
+
+        <!-- Top App Bar & Hero Banner -->
+        <div class="relative h-72 w-full bg-cover bg-center text-white flex flex-col justify-between p-5" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80');">
+            <div class="absolute inset-0 gradient-hero"></div>
+            
+            <!-- Top Nav Icons -->
+            <div class="relative z-10 flex justify-between items-center pt-2">
+                <div class="flex items-center space-x-2">
+                    <span class="bg-blue-600 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider text-white shadow-md">D-DAY</span>
+                    <span class="text-xs text-gray-200 bg-black/30 backdrop-blur-md px-2 py-1 rounded-full">부산 ⇄ 거제</span>
+                </div>
+                <div class="flex space-x-3">
+                    <button onclick="shareTrip()" class="p-2 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/30 transition">
+                        <i data-lucide="share-2" class="w-4 h-4"></i>
+                    </button>
+                    <button onclick="toggleBookmark()" id="bookmarkBtn" class="p-2 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/30 transition">
+                        <i data-lucide="heart" class="w-4 h-4 fill-transparent"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Title & Main Info -->
+            <div class="relative z-10 mb-2">
+                <div class="flex items-center space-x-2 mb-1">
+                    <span class="text-xs font-semibold text-blue-300 bg-blue-900/60 px-2 py-0.5 rounded">커플 힐링 여행</span>
+                    <span class="text-xs text-gray-300">with 마노 ❤️</span>
+                </div>
+                <h1 class="text-3xl font-extrabold tracking-tight">거제야호 🌊</h1>
+                <p class="text-xs text-gray-300 mt-1 flex items-center gap-1">
+                    <i data-lucide="calendar" class="w-3.5 h-3.5"></i> 1박 2일 · 맛집 & 바다 인생샷 투어
+                </p>
+            </div>
+        </div>
+
+        <!-- Day Selector Tabs -->
+        <div class="sticky top-0 z-30 bg-white border-b border-gray-200 flex text-center font-medium text-sm shadow-sm">
+            <button onclick="switchTab('day1')" id="tab-day1" class="flex-1 py-3 tab-active transition-all flex items-center justify-center gap-1.5">
+                <i data-lucide="map-pin" class="w-4 h-4 text-blue-600"></i> DAY 1 (첫째날)
+            </button>
+            <button onclick="switchTab('day2')" id="tab-day2" class="flex-1 py-3 text-gray-500 hover:text-gray-800 transition-all flex items-center justify-center gap-1.5">
+                <i data-lucide="sun" class="w-4 h-4"></i> DAY 2 (둘째날)
+            </button>
+            <button onclick="switchTab('checklist')" id="tab-checklist" class="flex-1 py-3 text-gray-500 hover:text-gray-800 transition-all flex items-center justify-center gap-1.5">
+                <i data-lucide="check-square" class="w-4 h-4"></i> 준비물 & 팁
+            </button>
+        </div>
+
+        <!-- TAB 1: DAY 1 CONTENT -->
+        <div id="content-day1" class="p-4 space-y-4">
+            
+            <!-- Summary Card -->
+            <div class="bg-blue-50 border border-blue-100 rounded-2xl p-4 flex justify-between items-center">
+                <div>
+                    <div class="text-xs text-blue-600 font-bold uppercase tracking-wider">DAY 1 요약</div>
+                    <div class="text-sm font-bold text-gray-800 mt-0.5">거제 도착 ➔ 칼국수 ➔ 땅굴 ➔ 바람의언덕 ➔ 삼겹살</div>
+                </div>
+                <div class="text-right">
+                    <span class="inline-block bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-lg">5개 스팟</span>
+                </div>
+            </div>
+
+            <!-- Timeline List -->
+            <div class="relative border-l-2 border-blue-200 ml-4 pl-6 space-y-6 pt-2">
+
+                <!-- Spot 1: 거제 도착 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] top-0 bg-blue-600 text-white p-1.5 rounded-full ring-4 ring-slate-50 shadow">
+                        <i data-lucide="navigation" class="w-4 h-4"></i>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">15:00</span>
+                            <span class="text-xs text-gray-400">출발 & 도착</span>
+                        </div>
+                        <h3 class="font-bold text-base mt-1 text-gray-900">거제도 입성 🚗</h3>
+                        <p class="text-xs text-gray-500 mt-1">부산에서 출발하여 드라이브 후 거제도 도착! 안전 운전 끝.</p>
+                    </div>
+                </div>
+
+                <!-- Spot 2: 배말칼국수김밥 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] top-0 bg-amber-500 text-white p-1.5 rounded-full ring-4 ring-slate-50 shadow">
+                        <i data-lucide="utensils" class="w-4 h-4"></i>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">15:15 ~ 16:15</span>
+                            <span class="text-xs text-amber-500 font-semibold">★ 거제 대표 맛집</span>
+                        </div>
+                        <h3 class="font-bold text-base mt-1 text-gray-900">배말칼국수김밥 🍜</h3>
+                        <p class="text-xs text-gray-600 mt-1">경남 거제시 일운면 지세포해안로 50</p>
+                        <p class="text-xs text-gray-500 mt-1">진한 배말 육수 칼국수와 고소한 배말김밥으로 거제 도착 후 첫 든든한 식사!</p>
+                        <div class="mt-3 flex gap-2">
+                            <button onclick="openMap('배말칼국수김밥')" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs py-2 rounded-xl font-medium transition flex items-center justify-center gap-1">
+                                <i data-lucide="map" class="w-3.5 h-3.5"></i> 지도 보기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spot 3: 근포마을땅굴 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] top-0 bg-purple-500 text-white p-1.5 rounded-full ring-4 ring-slate-50 shadow">
+                        <i data-lucide="camera" class="w-4 h-4"></i>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-purple-600 bg-purple-50 px-2 py-0.5 rounded">17:00 ~ 17:50</span>
+                            <span class="text-xs text-purple-500 font-semibold">📸 필수 포토존</span>
+                        </div>
+                        <h3 class="font-bold text-base mt-1 text-gray-900">근포마을땅굴 ✨</h3>
+                        <p class="text-xs text-gray-600 mt-1">경남 거제시 남부면 저구리 450-1</p>
+                        <p class="text-xs text-gray-500 mt-1">노을빛 받으면서 마노 님이랑 커플 실루엣 인생샷 찍는 곳! 삼각대 필수 챙기기.</p>
+                        <div class="mt-3 flex gap-2">
+                            <button onclick="openMap('근포마을땅굴')" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs py-2 rounded-xl font-medium transition flex items-center justify-center gap-1">
+                                <i data-lucide="map" class="w-3.5 h-3.5"></i> 지도 보기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spot 4: 바람의 언덕 & 신선대 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] top-0 bg-emerald-500 text-white p-1.5 rounded-full ring-4 ring-slate-50 shadow">
+                        <i data-lucide="wind" class="w-4 h-4"></i>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">18:00 ~ 19:15</span>
+                            <span class="text-xs text-emerald-500 font-semibold">🌊 힐링 바다</span>
+                        </div>
+                        <h3 class="font-bold text-base mt-1 text-gray-900">바람의 언덕 & 신선대 🍃</h3>
+                        <p class="text-xs text-gray-600 mt-1">경남 거제시 남부면 갈곶리</p>
+                        <p class="text-xs text-gray-500 mt-1">탁 트인 바닷바람 맞으며 거제 대표 명소 산책하기! 풍차 앞 사진도 잊지 말기.</p>
+                        <div class="mt-2 bg-amber-50 border border-amber-100 p-2 rounded-lg text-xs text-amber-800 flex items-start gap-1">
+                            <i data-lucide="coffee" class="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5"></i>
+                            <span>시간 여유가 있으면 근처 오션뷰 카페에서 잠시 힐링 타임! (선택)</span>
+                        </div>
+                        <div class="mt-3 flex gap-2">
+                            <button onclick="openMap('바람의언덕')" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs py-2 rounded-xl font-medium transition flex items-center justify-center gap-1">
+                                <i data-lucide="map" class="w-3.5 h-3.5"></i> 지도 보기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spot 5: 목구멍 거제본점 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] top-0 bg-red-500 text-white p-1.5 rounded-full ring-4 ring-slate-50 shadow">
+                        <i data-lucide="flame" class="w-4 h-4"></i>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded">20:00 ~ 21:30</span>
+                            <span class="text-xs text-red-500 font-semibold">🥩 솥뚜껑 삼겹살</span>
+                        </div>
+                        <h3 class="font-bold text-base mt-1 text-gray-900">목구멍 거제본점 🥓</h3>
+                        <p class="text-xs text-gray-600 mt-1">경남 거제시 아주1로2길 29</p>
+                        <p class="text-xs text-gray-500 mt-1">하루의 마무리는 구워주는 솥뚜껑 삼겹살에 소주 한 잔! 마노 님이랑 맛있는 밤 보내기.</p>
+                        <div class="mt-3 flex gap-2">
+                            <button onclick="openMap('목구멍 거제본점')" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs py-2 rounded-xl font-medium transition flex items-center justify-center gap-1">
+                                <i data-lucide="map" class="w-3.5 h-3.5"></i> 지도 보기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spot 6: 숙소 휴식 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] top-0 bg-indigo-500 text-white p-1.5 rounded-full ring-4 ring-slate-50 shadow">
+                        <i data-lucide="moon" class="w-4 h-4"></i>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded">21:30 ~</span>
+                            <span class="text-xs text-indigo-500 font-semibold">🌙 굿나잇</span>
+                        </div>
+                        <h3 class="font-bold text-base mt-1 text-gray-900">숙소 입실 및 푹 쉬기 🛌</h3>
+                        <p class="text-xs text-gray-500 mt-1">맛있는 거 든든히 먹고 숙소로 이동해 푹 쉬기!</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TAB 2: DAY 2 CONTENT -->
+        <div id="content-day2" class="p-4 space-y-4 hidden">
+            
+            <!-- Summary Card -->
+            <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-4 flex justify-between items-center">
+                <div>
+                    <div class="text-xs text-indigo-600 font-bold uppercase tracking-wider">DAY 2 요약</div>
+                    <div class="text-sm font-bold text-gray-800 mt-0.5">체크아웃 ➔ 물회 ➔ 감성카페 ➔ 부산 복귀</div>
+                </div>
+                <div class="text-right">
+                    <span class="inline-block bg-indigo-600 text-white text-xs font-bold px-2 py-1 rounded-lg">4개 스팟</span>
+                </div>
+            </div>
+
+            <!-- Timeline List -->
+            <div class="relative border-l-2 border-indigo-200 ml-4 pl-6 space-y-6 pt-2">
+
+                <!-- Spot 1: 체크아웃 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] top-0 bg-slate-600 text-white p-1.5 rounded-full ring-4 ring-slate-50 shadow">
+                        <i data-lucide="key" class="w-4 h-4"></i>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-gray-600 bg-gray-100 px-2 py-0.5 rounded">~ 12:00</span>
+                            <span class="text-xs text-gray-400">여유로운 아침</span>
+                        </div>
+                        <h3 class="font-bold text-base mt-1 text-gray-900">여유롭게 체크아웃 😴</h3>
+                        <p class="text-xs text-gray-500 mt-1">늦잠 잔 후 12시 정시에 맞춰 여유롭게 체크아웃 완료!</p>
+                    </div>
+                </div>
+
+                <!-- Spot 2: 강성횟집 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] top-0 bg-cyan-500 text-white p-1.5 rounded-full ring-4 ring-slate-50 shadow">
+                        <i data-lucide="fish" class="w-4 h-4"></i>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-cyan-600 bg-cyan-50 px-2 py-0.5 rounded">12:15 ~ 13:30</span>
+                            <span class="text-xs text-cyan-500 font-semibold">🥣 해녀 물회 맛집</span>
+                        </div>
+                        <h3 class="font-bold text-base mt-1 text-gray-900">강성횟집 🐟</h3>
+                        <p class="text-xs text-gray-600 mt-1">경남 거제시 일운면 지세포해안로 204</p>
+                        <p class="text-xs text-gray-500 mt-1">해장으로 완벽한 시원 새콤한 해녀 물회 한 그릇! 거제 바다 향 가득한 점심 먹기.</p>
+                        <div class="mt-3 flex gap-2">
+                            <button onclick="openMap('강성횟집')" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs py-2 rounded-xl font-medium transition flex items-center justify-center gap-1">
+                                <i data-lucide="map" class="w-3.5 h-3.5"></i> 지도 보기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spot 3: 카페 두록 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] top-0 bg-pink-500 text-white p-1.5 rounded-full ring-4 ring-slate-50 shadow">
+                        <i data-lucide="coffee" class="w-4 h-4"></i>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-pink-600 bg-pink-50 px-2 py-0.5 rounded">13:40 ~ 15:30</span>
+                            <span class="text-xs text-pink-500 font-semibold">🍰 감성 뿜뿜 카페</span>
+                        </div>
+                        <h3 class="font-bold text-base mt-1 text-gray-900">카페 두록 (DULOK) ☕</h3>
+                        <p class="text-xs text-gray-600 mt-1">경남 거제시 장승포로 77</p>
+                        <p class="text-xs text-gray-500 mt-1">장승포의 감성 가득한 카페에서 마노 님이랑 맛있는 디저트 먹으며 도란도란 여행 마무리 수다!</p>
+                        <div class="mt-3 flex gap-2">
+                            <button onclick="openMap('카페 두록')" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs py-2 rounded-xl font-medium transition flex items-center justify-center gap-1">
+                                <i data-lucide="map" class="w-3.5 h-3.5"></i> 지도 보기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spot 4: 부산 귀환 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] top-0 bg-blue-600 text-white p-1.5 rounded-full ring-4 ring-slate-50 shadow">
+                        <i data-lucide="car" class="w-4 h-4"></i>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">15:30 ~</span>
+                            <span class="text-xs text-gray-400">안전운전</span>
+                        </div>
+                        <h3 class="font-bold text-base mt-1 text-gray-900">부산으로 귀환 🏠</h3>
+                        <p class="text-xs text-gray-500 mt-1">거가대교 드라이브하며 안전하게 부산 복귀! "거제야호" 성공적 마무리!</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TAB 3: CHECKLIST CONTENT -->
+        <div id="content-checklist" class="p-4 space-y-4 hidden">
+            
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                <h3 class="font-bold text-base text-gray-900 flex items-center gap-2 mb-3">
+                    <i data-lucide="check-circle-2" class="w-5 h-5 text-blue-600"></i> 여행 준비물 체크리스트
+                </h3>
+                <div class="space-y-2.5 text-sm" id="checklist-items">
+                    <label class="flex items-center space-x-3 cursor-pointer p-1.5 hover:bg-gray-50 rounded-lg">
+                        <input type="checkbox" class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 border-gray-300">
+                        <span class="text-gray-700">삼각대 / 셀카봉 (근포땅굴 인생샷 필수!)</span>
+                    </label>
+                    <label class="flex items-center space-x-3 cursor-pointer p-1.5 hover:bg-gray-50 rounded-lg">
+                        <input type="checkbox" class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 border-gray-300">
+                        <span class="text-gray-700">바람막이 외투 (바람의 언덕 바람 대비)</span>
+                    </label>
+                    <label class="flex items-center space-x-3 cursor-pointer p-1.5 hover:bg-gray-50 rounded-lg">
+                        <input type="checkbox" class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 border-gray-300">
+                        <span class="text-gray-700">보조배터리 & 충전기</span>
+                    </label>
+                    <label class="flex items-center space-x-3 cursor-pointer p-1.5 hover:bg-gray-50 rounded-lg">
+                        <input type="checkbox" class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 border-gray-300">
+                        <span class="text-gray-700">운전면허증 & 세면도구</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Travel Tips -->
+            <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 rounded-2xl border border-blue-100">
+                <h3 class="font-bold text-base text-blue-900 flex items-center gap-2 mb-2">
+                    <i data-lucide="lightbulb" class="w-5 h-5 text-amber-500"></i> "거제야호" 스마트 팁
+                </h3>
+                <ul class="text-xs text-blue-800 space-y-2 list-disc list-inside leading-relaxed">
+                    <li><b>근포땅굴 꿀팁:</b> 일몰 30분~1시간 전에 방문하면 하늘 빛이 노을로 물들어 훨씬 로맨틱한 사진이 나옵니다.</li>
+                    <li><b>동선 최적화:</b> 1일차 동선(일운 ➔ 남부면 ➔ 아주동) 및 2일차 동선(지세포 ➔ 장승포)으로 차 막힘을 최소화했어요.</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Floating Bottom Bar -->
+        <div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white/90 backdrop-blur-md border-t border-gray-200 p-3 flex justify-between items-center z-40">
+            <div class="flex items-center space-x-2">
+                <div class="w-9 h-9 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm">
+                    마노
+                </div>
+                <div>
+                    <div class="text-xs text-gray-500">함께하는 멤버</div>
+                    <div class="text-xs font-bold text-gray-800">마노 ❤️ 나 (2명)</div>
+                </div>
+            </div>
+            <button onclick="shareTrip()" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-lg transition flex items-center gap-1.5">
+                <i data-lucide="send" class="w-4 h-4"></i> 일정 마노에게 공유
+            </button>
+        </div>
+
+        <!-- Toast Notification -->
+        <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 bg-gray-900/90 text-white text-xs px-4 py-2.5 rounded-full shadow-2xl transition-all duration-300 opacity-0 pointer-events-none z-50 flex items-center gap-1.5">
+            <i data-lucide="check" class="w-4 h-4 text-green-400"></i> <span id="toastMsg">클립보드에 복사되었습니다!</span>
+        </div>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        function switchTab(tabName) {
+            document.getElementById('content-day1').classList.add('hidden');
+            document.getElementById('content-day2').classList.add('hidden');
+            document.getElementById('content-checklist').classList.add('hidden');
+
+            document.getElementById('tab-day1').className = "flex-1 py-3 text-gray-500 hover:text-gray-800 transition-all flex items-center justify-center gap-1.5";
+            document.getElementById('tab-day2').className = "flex-1 py-3 text-gray-500 hover:text-gray-800 transition-all flex items-center justify-center gap-1.5";
+            document.getElementById('tab-checklist').className = "flex-1 py-3 text-gray-500 hover:text-gray-800 transition-all flex items-center justify-center gap-1.5";
+
+            document.getElementById('content-' + tabName).classList.remove('hidden');
+            document.getElementById('tab-' + tabName).className = "flex-1 py-3 tab-active transition-all flex items-center justify-center gap-1.5";
+        }
+
+        function openMap(placeName) {
+            const url = `https://m.map.naver.com/search2/search.naver?query=${encodeURIComponent('거제 ' + placeName)}`;
+            window.open(url, '_blank');
+        }
+
+        let bookmarked = false;
+        function toggleBookmark() {
+            bookmarked = !bookmarked;
+            const btn = document.getElementById('bookmarkBtn');
+            if (bookmarked) {
+                btn.innerHTML = `<i data-lucide="heart" class="w-4 h-4 fill-red-500 text-red-500"></i>`;
+                showToast("여행 코스를 저장했습니다 ❤️");
+            } else {
+                btn.innerHTML = `<i data-lucide="heart" class="w-4 h-4 fill-transparent"></i>`;
+                showToast("저장이 취소되었습니다");
+            }
+            lucide.createIcons();
+        }
+
+        function shareTrip() {
+            const shareText = "🌊 마노와 함께하는 1박2일 거제여행 일정표 '거제야호'\nDAY1: 배말칼국수 ➔ 근포땅굴 ➔ 바람의언덕 ➔ 목구멍\nDAY2: 강성횟집 ➔ 카페 두록";
+            if (navigator.share) {
+                navigator.share({ title: "거제야호 🌊", text: shareText, url: window.location.href }).catch(() => {});
+            } else {
+                alert(shareText);
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = message;
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 2200);
+        }
+    </script>
+</body>
+</html>
